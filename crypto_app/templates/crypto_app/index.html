@@ -1,0 +1,28 @@
+{% extends "crypto_app/base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Análise de Investimento em Criptomoedas</h1>
+
+{% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-primary">Analisar</button>
+</form>
+
+<div class="mt-4">
+    <h4>Criptomoedas populares:</h4>
+    <ul>
+        <li>Bitcoin (BTC)</li>
+        <li>Ethereum (ETH)</li>
+        <li>Binance Coin (BNB)</li>
+        <li>Cardano (ADA)</li>
+        <li>Solana (SOL)</li>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "crypto_app/base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Análise de {{ analysis.name }} ({{ analysis.symbol }})</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>Recomendação: 
+            <span class="badge 
+                {% if analysis.recommendation == 'buy' %}bg-success
+                {% elif analysis.recommendation == 'hold' %}bg-warning
+                {% else %}bg-danger{% endif %}">
+                {{ analysis.recommendation|upper }}
+            </span>
+        </h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Confiança:</strong> {{ analysis.confidence|floatformat:2 }}</p>
+        <p><strong>Nível de Risco:</strong> 
+            <span class="badge 
+                {% if analysis.risk_level == 'low' %}bg-success
+                {% elif analysis.risk_level == 'medium' %}bg-warning
+                {% else %}bg-danger{% endif %}">
+                {{ analysis.risk_level|upper }}
+            </span>
+        </p>
+        
+        <h4 class="mt-3">Previsão de Valorização:</h4>
+        <ul>
+            <li>3 meses: {{ analysis.price_prediction.3_months }}</li>
+            <li>6 meses: {{ analysis.price_prediction.6_months }}</li>
+            <li>1 ano: {{ analysis.price_prediction.1_year }}</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Análise Detalhada</h3>
+    </div>
+    <div class="card-body">
+        <p>{{ analysis.analysis_summary }}</p>
+    </div>
+</div>
+
+<a href="{% url 'index' %}" class="btn btn-primary">Nova Análise</a>
+{% endblock %}
