@@ -1,7 +1,7 @@
 # Análise de Investimento em Criptomoedas com IA
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Django](https://img.shields.io/badge/Django-4.2-green.svg)
+![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![Django](https://img.shields.io/badge/Django-5.1-green.svg)
 ![OpenAI](https://img.shields.io/badge/OpenAI-API-brightgreen.svg)
 
 Um sistema inteligente para análise e recomendação de investimentos em criptomoedas utilizando Django e a API da OpenAI.
