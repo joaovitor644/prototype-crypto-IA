@@ -2,7 +2,7 @@ from django import forms
 
 class CryptoAnalysisForm(forms.Form):
     symbol = forms.CharField(
-        label='Símbolo da Criptomoeda (ex: BTC, ETH)',
-        max_length=10,
+        label='Digite o que deseja saber',
+        max_length=256,
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
