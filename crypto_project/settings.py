@@ -19,7 +19,8 @@ load_dotenv()
 
 # Configurações da API
 COINMARKETCAP_API_KEY = os.getenv('COINMARKETCAP_API_KEY')
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY') 
+NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
 # Configurações do modelo
 RISK_THRESHOLD = 0.7 
@@ -121,10 +122,16 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Base URL for serving static files
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+# Directory to collect static files
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Adjust based on your project structure
+]
+
+# Path where static files are collected during deployment
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

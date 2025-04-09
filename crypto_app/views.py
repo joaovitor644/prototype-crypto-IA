@@ -4,7 +4,7 @@ from crypto_app.agents.orchestrator import Orchestrator
 from django.conf import settings
 from .forms import CryptoAnalysisForm
 from .models import CryptoAnalysis
-from .utils import get_crypto_data, analyze_with_llm
+from .utils import get_crypto_chart_data, get_crypto_data, analyze_with_llm, get_crypto_news, get_random_crypto_data
 import json
 
 """
@@ -54,6 +54,14 @@ def index(request):
 """
 
 def index(request):
+    crypto_data = get_random_crypto_data()
+    crypto_news = get_crypto_news()
+    return render(request, 'crypto_app/index.html', {"crypto_data": crypto_data, "crypto_news": crypto_news})
+
+def get_chart_data(request):
+    return get_crypto_chart_data(request)
+
+def dashboard(request):
     if request.method == 'POST':
         form = CryptoAnalysisForm(request.POST)
         if form.is_valid():
@@ -65,7 +73,7 @@ def index(request):
                 # Obtém dados da API
                 crypto_data = get_crypto_data(symbol)
                 if not crypto_data:
-                    return render(request, 'crypto_app/index.html', {
+                    return render(request, 'crypto_app/dashboard.html', {
                         'form': form,
                         'error': 'Não foi possível obter dados para esta criptomoeda.'
                     })
@@ -116,4 +124,4 @@ def index(request):
     else:
         form = CryptoAnalysisForm()
     
-    return render(request, 'crypto_app/index.html', {'form': form})
+    return render(request, 'crypto_app/dashboard.html', {'form': form})

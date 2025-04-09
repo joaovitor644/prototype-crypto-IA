@@ -1,28 +1,170 @@
-{% extends "crypto_app/base.html" %}
-
-{% block content %}
-<h1 class="mb-4">Análise de Investimento em Criptomoedas</h1>
-
-{% if error %}
-    <div class="alert alert-danger">{{ error }}</div>
-{% endif %}
-
-<form method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        {{ form.as_p }}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitCryptoAI - Assistente de Investimentos</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            background-color: #3b3b3b;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            text-align: center;
+            color: white;
+            margin: 10vh auto;
+            padding: 20px;
+            display: flex;
+            gap: 40px; /* Espaço entre os cards */
+        }
+        .main-content {
+            flex: 2;
+        }
+        .container h1 {
+            color: #e2d300;
+            text-align: center;
+        }
+        .card {
+            width: 100%;
+            padding: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background: rgb(77, 77, 77);
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .info-card {
+            background: #2e2e2e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .badge {
+            background-color: #e2d300;
+            color: #2e2e2e;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+        .select-container {
+            background-color: #e2d300;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 1050px;
+            margin-top: 20px;
+        }
+        .prompt-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            margin: 30px auto;
+            align-items: center;
+            gap: 10px;
+        }
+        .analyze-btn {
+            padding: 15px 20px;
+            background-color: #e2d300;
+            border: none;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .news-container {
+            flex: 1;
+            background: #2e2e2e;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 100%;
+            overflow-y: auto;
+            margin: 130px auto auto 50px; /* Distanciamento do topo */
+        }
+        .news-container h3 {
+            color: #e2d300;
+            margin-bottom: 15px;
+        }
+        .news-item {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .news-item h4 {
+            margin: 0 0 5px;
+            color: #fff;
+        }
+        .news-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .prompt-container {
+                width: 100%;
+                max-width: 100%;
+                flex-direction: column;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>BitCryptoAI - Seu Assistente de Investimentos em Criptomoedas</h1>
+            <div class="card">
+                <div class="info-card">
+                    {% if crypto_data %}
+                        <span class="badge">💰 Moeda: ${{ crypto_data.name}}</span>
+                        <span class="badge">💰 Preço Atual: ${{ crypto_data.price|floatformat:2 }}</span>
+                        <span class="badge">📈 Variação 24h: {{ crypto_data.price_change_24h|floatformat:2 }}%</span>
+                        <span class="badge">🏦 Volume de Mercado: ${{ crypto_data.market_cap|floatformat:2 }}</span>
+                        <span class="badge">🚀 Alta Histórica (Aprox.): {{ crypto_data.all_time_high }}</span>
+                    {% else %}
+                        <span class="badge">Erro ao carregar dados da criptomoeda.</span>
+                    {% endif %}
+                </div>
+                <h2>Assistente Inteligente</h2>
+                <p>Análise Técnica do Investimento em Bitcoin: Perspectivas de Curto e Longo Prazo</p> 
+                <p>Para iniciar uma nova analise, clique no botão abaixo...</p>
+            </div>
+            <div class="prompt-container">
+                <button class="analyze-btn" onclick="window.location.href='{% url 'dashboard' %}'">Nova Análise</button>
+            </div>
+        </div>
+        <div class="news-container">
+            <h3>📰 Notícias Recentes</h3>
+            {% if crypto_news %}
+                {% for news in crypto_news %}
+                    <div class="news-item">
+                        <h4><a href="{{ news.url }}" target="_blank" style="color: #e2d300;">{{ news.title }}</a></h4>
+                        <p>{{ news.description }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Não foi possível carregar as notícias no momento.</p>
+            {% endif %}
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Analisar</button>
-</form>
-
-<div class="mt-4">
-    <h4>Criptomoedas populares:</h4>
-    <ul>
-        <li>Bitcoin (BTC)</li>
-        <li>Ethereum (ETH)</li>
-        <li>Binance Coin (BNB)</li>
-        <li>Cardano (ADA)</li>
-        <li>Solana (SOL)</li>
-    </ul>
-</div>
-{% endblock %}
+</body>
+</html>
