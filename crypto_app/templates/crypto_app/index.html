@@ -89,9 +89,9 @@
             background: #2e2e2e;
             padding: 20px;
             border-radius: 10px;
-            max-height: 100%;
+            max-height: 400px;
             overflow-y: auto;
-            margin: 130px auto auto 50px; /* Distanciamento do topo */
+            margin: 114px auto auto 50px; /* Distanciamento do topo */
         }
         .news-container h3 {
             color: #e2d300;
@@ -135,10 +135,10 @@
             <div class="card">
                 <div class="info-card">
                     {% if crypto_data %}
-                        <span class="badge">💰 Moeda: ${{ crypto_data.name}}</span>
-                        <span class="badge">💰 Preço Atual: ${{ crypto_data.price|floatformat:2 }}</span>
+                        <span class="badge">💰 Moeda: {{ crypto_data.name}}</span>
+                        <span class="badge">💰 Preço Atual: R${{ crypto_data.price|floatformat:2 }}</span>
                         <span class="badge">📈 Variação 24h: {{ crypto_data.price_change_24h|floatformat:2 }}%</span>
-                        <span class="badge">🏦 Volume de Mercado: ${{ crypto_data.market_cap|floatformat:2 }}</span>
+                        <span class="badge">🏦 Volume de Mercado: R${{ crypto_data.market_cap|floatformat:2 }}</span>
                         <span class="badge">🚀 Alta Histórica (Aprox.): {{ crypto_data.all_time_high }}</span>
                     {% else %}
                         <span class="badge">Erro ao carregar dados da criptomoeda.</span>

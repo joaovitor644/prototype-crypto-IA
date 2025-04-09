@@ -87,9 +87,7 @@ class MetadataParams(BaseModel):
     symbol: str = Field(
         description="""Pass one or more comma-separated cryptocurrency symbols. Example: "BTC,ETH". At least one "id" or "slug" or "symbol" is required for this request. Please note that starting in the v2 endpoint, due to the fact that a symbol is not unique, if you request by symbol each data response will contain an array of objects containing all of the coins that use each requested symbol. The v1 endpoint will still return a single object, the highest ranked coin using that symbol.""",
     )
-    address: Optional[str] = Field(
-        description="""Alternatively pass in a contract address. Example: "0xc40af1e4fecfa05ce6bab79dcd8b373d2e436c4e".""",
-    )
+
     skip_invalid: Optional[bool] = Field(
         description="""Default: false; Pass true to relax request validation rules. When requesting records on multiple cryptocurrencies an error is returned if any invalid cryptocurrencies are requested or a cryptocurrency does not have matching records in the requested timeframe. If set to true, invalid lookups will be skipped allowing valid cryptocurrencies to still be returned.""",
     )
@@ -359,7 +357,7 @@ class CoinMarketAgent(Agent):
 
     def _call_function(self, function_name, params):
         functions: dict[str, Callable[[Any], httpx.Response]] = {
-            "categories": self._categories,
+            "categories": self._categories ,
             "category": self._category,
             "coinmarketcap_id_map": self._coinmarketcap_id_map,
             "metadata": self._metadata,
@@ -369,7 +367,7 @@ class CoinMarketAgent(Agent):
         if function_name not in functions:
             logger.error("function-not-found=%s", function_name)
             raise Exception(f"Function '{function_name}' does not exist")
-
+        params = { k: v for k, v in params.items() if v is not None }
         response = functions[function_name](params)
         if response.status_code != 200:
             logger.error(

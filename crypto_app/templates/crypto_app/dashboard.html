@@ -40,6 +40,7 @@
                 <div class="alert alert-danger">{{ error }}</div>
                 {% endif %}
                 <form method="post">
+                    <P>Digite sua pergunta sobre criptomoedas ou digite o código da moeda para obter uma analise:</P>
                     {% csrf_token %} 
                     {{ form.as_p }} 
                     <button type="submit" class="analyze-btn">Analisar</button>
@@ -98,7 +99,7 @@
                         if (data.success) {
                             cryptoChart.data.labels = data.dates;
                             cryptoChart.data.datasets[0].data = data.prices;
-                            cryptoChart.data.datasets[0].label = `${symbol}/USD`
+                            cryptoChart.data.datasets[0].label = `${symbol}/BRL`
                             cryptoChart.update();
 
                             const lastDaysElement = document.getElementById('lastDays');

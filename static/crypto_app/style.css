@@ -22,9 +22,10 @@ body {
     position: relative;
     height: 200px;
     width: 100%;
+    margin-bottom: 10px;
 }
 
-.crypto-input {
+input .crypto-input {
     flex: 1;
     padding: 15px;
     border: 1px solid #5e5e5e;
@@ -33,7 +34,21 @@ body {
     outline: none;
     font-size: 16px;
     color: white;
+    
 }
+
+input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #5e5e5e;
+    background-color: #5e5e5e;
+    border-radius: 9px;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    width: 1050px;
+}
+
 
 .select-container {
     background-color: #e2d300;
@@ -43,7 +58,7 @@ body {
     align-items: center;
     gap: 10px; /* Space between input and button */
     max-width: 1050px;
-    margin: auto; /* Center the select container */
+    margin: 30px auto; /* Center the select container */
 }
 
 .btn-update {
@@ -84,6 +99,10 @@ h1 {
     cursor: pointer;
 }
 
+
+label{
+    display: none;
+}
 p {
     color: white;
 }

@@ -16,7 +16,7 @@ def get_random_crypto_data():
     params = {
         "start": 1,
         "limit": 50,  # Obter os dados das 50 principais criptomoedas
-        "convert": "USD",
+        "convert": "BRL",
     }
 
     try:
@@ -29,9 +29,9 @@ def get_random_crypto_data():
         return {
             "name": random_crypto["name"],
             "symbol": random_crypto["symbol"],
-            "price": random_crypto["quote"]["USD"]["price"],
-            "price_change_24h": random_crypto["quote"]["USD"]["percent_change_24h"],
-            "market_cap": random_crypto["quote"]["USD"]["market_cap"],
+            "price": random_crypto["quote"]["BRL"]["price"],
+            "price_change_24h": random_crypto["quote"]["BRL"]["percent_change_24h"],
+            "market_cap": random_crypto["quote"]["BRL"]["market_cap"],
             "all_time_high": random_crypto.get("max_supply", "N/A"),  # Alta histórica aproximada
         }
     except requests.RequestException as e:
@@ -45,7 +45,7 @@ def get_crypto_chart_data(request):
     headers = {
         "X-CMC_PRO_API_KEY": settings.COINMARKETCAP_API_KEY,
     }
-    params = {"symbol": symbol}
+    params = {'symbol': symbol, 'convert': 'BRL'}
     try:
         response = requests.get(url, headers=headers, params=params)
         response.raise_for_status()
@@ -63,7 +63,7 @@ def get_crypto_chart_data(request):
         dates = [(today - timedelta(days=i)).strftime("%d %b") for i in range(30)][::-1]
 
         # Current price of the cryptocurrency
-        price = data["data"][symbol]["quote"]["USD"]["price"]
+        price = data["data"][symbol]["quote"]["BRL"]["price"]
 
         # Generate mock data with realistic percentage variations for 30 days
         historical_prices = []
@@ -113,7 +113,7 @@ def get_crypto_news():
 def get_crypto_data(symbol):
     """Obtém dados da criptomoeda da CoinMarketCap API"""
     url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
-    params = {'symbol': symbol, 'convert': 'USD'}
+    params = {'symbol': symbol, 'convert': 'BRL'}
     headers = {
         'Accepts': 'application/json',
         'X-CMC_PRO_API_KEY': settings.COINMARKETCAP_API_KEY,
