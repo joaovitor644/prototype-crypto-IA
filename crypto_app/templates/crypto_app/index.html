@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <title>BitCryptoAI - Assistente de Investimentos</title>
     <style>
         body {
@@ -133,6 +135,7 @@
         <div class="main-content">
             <h1>BitCryptoAI - Seu Assistente de Investimentos em Criptomoedas</h1>
             <div class="card">
+                <h3>Informações da moeda  {{ crypto_data.name}}</h3>
                 <div class="info-card">
                     {% if crypto_data %}
                         <span class="badge">💰 Moeda: {{ crypto_data.name}}</span>
@@ -145,7 +148,7 @@
                     {% endif %}
                 </div>
                 <h2>Assistente Inteligente</h2>
-                <p>Análise Técnica do Investimento em Bitcoin: Perspectivas de Curto e Longo Prazo</p> 
+                <p>Análise Técnica do Investimento em Criptomoedas: Perspectivas de Curto e Longo Prazo</p> 
                 <p>Para iniciar uma nova analise, clique no botão abaixo...</p>
             </div>
             <div class="prompt-container">
@@ -153,7 +156,7 @@
             </div>
         </div>
         <div class="news-container">
-            <h3>📰 Notícias Recentes</h3>
+            <h3>📰 Notícias</h3>
             {% if crypto_news %}
                 {% for news in crypto_news %}
                     <div class="news-item">

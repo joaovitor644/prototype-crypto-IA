@@ -1,3 +1,15 @@
+# Integrantes
+
+
+
+- Elias da Costa Rodrigues
+- Felipe Porto Silva de Sá
+- João Vítor Santos
+- Leandro Araujo Viana
+- Saulo Almeida de Araujo
+
+
+
 # Análise de Investimento em Criptomoedas com IA
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
@@ -18,7 +30,7 @@ Um sistema inteligente para análise e recomendação de investimentos em cripto
 
 - Python 3.10+
 - Django 5.1+
-- Conta na [CoinMarketCap](https://coinmarketcap.com/api/)
+- Chave de [CoinMarketCap](https://coinmarketcap.com/api/)
 - Chave de API da [OpenAI](https://platform.openai.com/)
 - Chave de API da [NewsAPI](https://newsapi.org/)
 
@@ -67,8 +79,9 @@ python manage.py runserver
 
 Acesse `http://localhost:8000` no seu navegador e:
 
-1. Insira o símbolo da criptomoeda (ex: BTC, ETH)
-2. Clique em "Analisar"
+
+1. Clique em "Nova Análise"
+2. Insira o símbolo da criptomoeda (ex: BTC, ETH) para ver um gráfico de variação de câmbio ou insira um prompt a respeito de criptomoedas
 3. Veja a recomendação detalhada gerada pela IA
 
 ## 🛡️ Tratamento de Erros
@@ -79,15 +92,6 @@ O sistema inclui mecanismos robustos para lidar com:
 - Formatação inválida de dados
 - Fallback automático para manter a aplicação funcional
 
-## 🤝 Contribuição
-
-Contribuições são bem-vindas! Siga estes passos:
-
-1. Faça um fork do projeto
-2. Crie uma branch (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
 
 ## 📄 Licença
 
