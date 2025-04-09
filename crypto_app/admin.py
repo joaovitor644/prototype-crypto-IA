@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import CryptoAnalysis
+from .models import CryptoAnalysisResult
 
 @admin.register(CryptoAnalysis)
 class CryptoAnalysisAdmin(admin.ModelAdmin):

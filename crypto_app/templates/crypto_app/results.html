@@ -1,0 +1,16 @@
+{% extends "crypto_app/base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Resultado da Análise</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Análise Detalhada</h3>
+    </div>
+    <div class="card-body">
+        {{ analysis.analysis_summary|safe }}
+    </div>
+</div>
+
+<a href="{% url 'index' %}" class="btn btn-primary">Nova Análise</a>
+{% endblock %}

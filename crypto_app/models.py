@@ -13,3 +13,13 @@ class CryptoAnalysis(models.Model):
     
     def __str__(self):
         return f"{self.name} ({self.symbol}) - {self.recommendation}"
+    
+
+class CryptoAnalysisResult(models.Model): 
+    analysis_summary = models.TextField()
+    raw_data = models.JSONField()  # Dados brutos da API
+    
+    def __str__(self):
+        return f"{self.analysis_summary}"
+    
+     

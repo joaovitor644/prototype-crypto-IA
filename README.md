@@ -20,6 +20,7 @@ Um sistema inteligente para análise e recomendação de investimentos em cripto
 - Django 5.1+
 - Conta na [CoinMarketCap](https://coinmarketcap.com/api/)
 - Chave de API da [OpenAI](https://platform.openai.com/)
+- Chave de API da [NewsAPI](https://newsapi.org/)
 
 ## 🛠️ Instalação
 
@@ -49,6 +50,7 @@ Edite o `.env` com suas chaves de API:
 ```
 OPENAI_API_KEY=sua_chave_aqui
 COINMARKETCAP_API_KEY=sua_chave_aqui
+NEWS_API_KEY=sua_chave_aqui
 ```
 
 5. Execute as migrações:
