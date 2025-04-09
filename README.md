@@ -50,6 +50,7 @@ Edite o `.env` com suas chaves de API:
 ```
 OPENAI_API_KEY=sua_chave_aqui
 COINMARKETCAP_API_KEY=sua_chave_aqui
+NEWS_API_KEY=sua_chave_aqui
 ```
 
 5. Execute as migrações:
